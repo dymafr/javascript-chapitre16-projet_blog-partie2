@@ -7,40 +7,46 @@ module.exports = {
   entry: {
     main: path.join(__dirname, "src/index.js"),
     form: path.join(__dirname, "src/form/form.js"),
-    topbar: path.join(__dirname, "src/assets/javascripts/topbar.js")
+    topbar: path.join(__dirname, "src/assets/javascripts/topbar.js"),
   },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name].bundle.js"
+    filename: "[name].bundle.js",
   },
   module: {
     rules: [
       {
         test: /\.js/,
         exclude: /(node_modules)/,
-        use: ["babel-loader"]
+        use: ["babel-loader"],
       },
       {
         test: /\.scss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"]
-      }
-    ]
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([
-      { from: "./src/assets/images/*", to: "assets/images", flatten: true }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "./src/assets/images/*",
+          to: "assets/images",
+          flatten: true,
+        },
+      ],
+    }),
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.join(__dirname, "./src/index.html"),
-      chunks: ["main", "topbar"]
+      chunks: ["main", "topbar"],
     }),
     new HtmlWebpackPlugin({
       filename: "form.html",
       template: path.join(__dirname, "./src/form/form.html"),
-      chunks: ["form", "topbar"]
-    })
+      chunks: ["form", "topbar"],
+    }),
   ],
   stats: "minimal",
   devtool: "source-map",
@@ -49,6 +55,6 @@ module.exports = {
     open: false,
     contentBase: "./dist",
     inline: true,
-    port: 4000
-  }
+    port: 4000,
+  },
 };
