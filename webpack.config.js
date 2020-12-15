@@ -32,8 +32,7 @@ module.exports = {
       patterns: [
         {
           from: "./src/assets/images/*",
-          to: "assets/images",
-          flatten: true,
+          to: 'assets/images/[name].[ext]',
         },
       ],
     }),
@@ -53,7 +52,7 @@ module.exports = {
   mode: "development",
   devServer: {
     open: false,
-    contentBase: "./dist",
+    contentBase: path.resolve(__dirname, './dist'),
     inline: true,
     port: 4000,
   },
