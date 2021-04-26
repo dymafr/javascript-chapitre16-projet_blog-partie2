@@ -32,7 +32,7 @@ module.exports = {
       patterns: [
         {
           from: "./src/assets/images/*",
-          to: 'assets/images/[name].[ext]',
+          to: 'assets/images/[name][ext]',
         },
       ],
     }),
